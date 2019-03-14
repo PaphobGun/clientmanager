@@ -13,7 +13,9 @@ class App extends Component {
         <div className="main-body">
           <Navbar />
           <div className="container">
-            <Route path="/" component={Clients} />
+            <Switch>
+              <Route path="/" component={Clients} />
+            </Switch>
           </div>
         </div>
       </Router>
