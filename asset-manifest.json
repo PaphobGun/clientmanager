@@ -1,0 +1,15 @@
+{
+  "main.css": "/clientmanager/static/css/main.72d82db4.chunk.css",
+  "main.js": "/clientmanager/static/js/main.e5e5d740.chunk.js",
+  "main.js.map": "/clientmanager/static/js/main.e5e5d740.chunk.js.map",
+  "runtime~main.js": "/clientmanager/static/js/runtime~main.16ac5301.js",
+  "runtime~main.js.map": "/clientmanager/static/js/runtime~main.16ac5301.js.map",
+  "static/css/2.a1983ead.chunk.css": "/clientmanager/static/css/2.a1983ead.chunk.css",
+  "static/js/2.c2de7b53.chunk.js": "/clientmanager/static/js/2.c2de7b53.chunk.js",
+  "static/js/2.c2de7b53.chunk.js.map": "/clientmanager/static/js/2.c2de7b53.chunk.js.map",
+  "index.html": "/clientmanager/index.html",
+  "precache-manifest.0e04d1f83186eab69d0a893fc911905c.js": "/clientmanager/precache-manifest.0e04d1f83186eab69d0a893fc911905c.js",
+  "service-worker.js": "/clientmanager/service-worker.js",
+  "static/css/2.a1983ead.chunk.css.map": "/clientmanager/static/css/2.a1983ead.chunk.css.map",
+  "static/css/main.72d82db4.chunk.css.map": "/clientmanager/static/css/main.72d82db4.chunk.css.map"
+}
