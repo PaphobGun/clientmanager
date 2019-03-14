@@ -14,7 +14,7 @@ class Clients extends Component {
                 <div className="card-header">
                   <h4>Client List</h4>
                 </div>
-                <table className="table tabe-striped">
+                <table className="table table-responsive w-100 d-md-table table-striped">
                   <thead className="thead-dark">
                     <tr>
                       <th>Company</th>
