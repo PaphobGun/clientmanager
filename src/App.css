@@ -1,33 +1,64 @@
-.App {
-  text-align: center;
+html {
+  background: #354057;
+  height: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.main-body {
+  background: #354057;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.card-height {
+  min-height: 16rem;
 }
 
-.App-link {
-  color: #61dafb;
+.percent {
+  font-size: 5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.percent-green {
+  color: #1fdeb3;
+}
+
+.percent-red {
+  color: #ff7789;
+}
+
+.text-target-label {
+  font-size: 2rem;
+}
+
+.text-target {
+  font-size: 2.5rem;
+  color: #5897fe;
+}
+
+.text-sale-amount {
+  font-size: 2.5rem;
+  color: #e582ef;
+}
+
+.hr-white {
+  background: white;
+}
+
+/* If screen width is less than 36em ( 767/16 px) */
+@media only screen and (max-width: 47.9375em) {
+  .mb-resp-card {
+    margin-bottom: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+/* 453/16 */
+@media only screen and (max-width: 28.3125em) {
+  .text-target-label {
+    font-size: 1.8rem;
+  }
+
+  .text-target {
+    font-size: 2.3rem;
+  }
+
+  .text-sale-amount {
+    font-size: 2.3rem;
   }
 }
