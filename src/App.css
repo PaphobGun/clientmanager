@@ -3,6 +3,17 @@ html {
   height: 100%;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
 .main-body {
   background: #354057;
 }
@@ -12,7 +23,7 @@ html {
 }
 
 .percent {
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .percent-green {

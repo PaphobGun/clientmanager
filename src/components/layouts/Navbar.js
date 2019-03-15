@@ -25,13 +25,17 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link to="/" className="nav-link">
-                  Home
+                  <i className="fas fa-home" /> Home
                 </Link>
               </li>
               <li className="nav-item">
-                {' '}
+                <Link to="/clients/add" className="nav-link">
+                  <i className="fas fa-plus" /> Add Client
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link to="/" className="nav-link">
-                  About
+                  <i className="fas fa-question" /> About
                 </Link>
               </li>
             </ul>
@@ -42,7 +46,6 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                {' '}
                 <Link to="/" className="nav-link">
                   Logout
                 </Link>

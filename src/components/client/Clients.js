@@ -21,6 +21,7 @@ class Clients extends Component {
       <tr key={client.id}>
         <td>{client.company}</td>
         <td>{client.customerProduct}</td>
+        <td>{client.tier}</td>
         <td>{this.formatNumber(client.saleAmount)}</td>
         <td>
           <Link to={`/client/${client.id}`} className="btn btn-secondary">
@@ -52,14 +53,18 @@ class Clients extends Component {
             <div className="row">
               <div className="col">
                 <div className="card">
-                  <div className="card-header">
+                  <div className="card-header d-flex justify-content-between align-items-center">
                     <h4>Client List</h4>
+                    <Link to="/clients/add" className="btn btn-info">
+                      <i className="fas fa-plus" /> Add Client
+                    </Link>
                   </div>
                   <table className="table table-responsive w-100 d-md-table table-striped">
                     <thead className="thead-dark">
                       <tr>
                         <th>Company</th>
                         <th>Product</th>
+                        <th>Tier</th>
                         <th>Sale Amount (THB)</th>
                         <th />
                       </tr>
@@ -85,8 +90,10 @@ const mapStateToProps = state => {
   };
 };
 
-// put the data in collection'clients' in firestore into reduxstore(firestore) and attach to this component
+// put the data in collection'clients' in firestore into reduxstore(firestore) and attach to this component ordered by most sale amount at the top
 export default compose(
-  firestoreConnect([{ collection: 'clients' }]),
+  firestoreConnect([
+    { collection: 'clients', orderBy: ['saleAmount', 'desc'] }
+  ]),
   connect(mapStateToProps)
 )(Clients);
