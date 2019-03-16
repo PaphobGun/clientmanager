@@ -22,9 +22,7 @@ class Navbar extends Component {
       return (
         <>
           <li className="nav-item mr-3">
-            <a href="/#!" className="btn btn-danger text-white">
-              {auth.email}
-            </a>
+            <span className="btn btn-danger text-white">{auth.email}</span>
           </li>
           <li className="nav-item">
             <a
