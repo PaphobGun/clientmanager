@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firestoreConnect } from 'react-redux-firebase';
+import { Redirect } from 'react-router-dom';
+import { firestoreConnect, firebaseConnect } from 'react-redux-firebase';
 
 class AddClient extends Component {
   state = {
@@ -42,6 +43,9 @@ class AddClient extends Component {
   };
 
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/login" />;
+
     return (
       <div className="row">
         <div className="col-md-9 mx-auto">
@@ -166,7 +170,14 @@ class AddClient extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
+
 export default compose(
+  firebaseConnect(),
   firestoreConnect(),
-  connect(null)
+  connect(mapStateToProps)
 )(AddClient);

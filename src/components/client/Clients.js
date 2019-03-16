@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Link } from 'react-router-dom';
-import { firestoreConnect } from 'react-redux-firebase';
+import { Link, Redirect } from 'react-router-dom';
+import { firestoreConnect, firebaseConnect } from 'react-redux-firebase';
 
 import HeaderClient from './HeaderClient';
 import Spinner from '../layouts/Spinner';
@@ -24,7 +24,7 @@ class Clients extends Component {
         <td>{client.tier}</td>
         <td>{this.formatNumber(client.saleAmount)}</td>
         <td>
-          <Link to={`/client/${client.id}`} className="btn btn-secondary">
+          <Link to={`/clients/${client.id}`} className="btn btn-secondary">
             <i className="fas fa-angle-double-right" /> Details
           </Link>
         </td>
@@ -46,6 +46,10 @@ class Clients extends Component {
   render() {
     // If still loading data from firestore render Loading spinner instread
     if (this.props.clients) {
+      // Route Guard
+      const { auth } = this.props;
+      if (!auth.uid) return <Redirect to="/login" />;
+
       return (
         <>
           <HeaderClient total={this.sumTotalSale()} />
@@ -86,12 +90,14 @@ class Clients extends Component {
 // pull [array] clients from reduxStore to props
 const mapStateToProps = state => {
   return {
-    clients: state.firestore.ordered.clients
+    clients: state.firestore.ordered.clients,
+    auth: state.firebase.auth
   };
 };
 
 // put the data in collection'clients' in firestore into reduxstore(firestore) and attach to this component ordered by most sale amount at the top
 export default compose(
+  firebaseConnect(),
   firestoreConnect([
     { collection: 'clients', orderBy: ['saleAmount', 'desc'] }
   ]),

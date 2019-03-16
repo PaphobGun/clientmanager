@@ -24,7 +24,7 @@ const rrfConfig = {
 // Init firebase instance
 firebase.initializeApp(config);
 // Init firestore
-const firestore = firebase.firestore();
+firebase.firestore();
 
 // Add reactReduxFirebase enhancer when making store creator
 const createStoreWithFirebase = compose(
@@ -42,6 +42,7 @@ const rootReducer = combineReducers({
 const initialState = {};
 
 // Create Store
+// add reduxdevtools and can be loaded even user haven't install reduxdevtools
 const store = createStoreWithFirebase(
   rootReducer,
   initialState,

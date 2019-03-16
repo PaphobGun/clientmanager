@@ -52,6 +52,11 @@ input[type='number'] {
   background: white;
 }
 
+.btn-edit:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 /* If screen width is less than 36em ( 767/16 px) */
 @media only screen and (max-width: 47.9375em) {
   .mb-resp-card {

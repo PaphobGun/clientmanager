@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
 class HeaderClient extends Component {
-  // initial state
-  // target is from the localstorage or 1,000,000
+  // Init state
+  // target is comming from the firestore or default is 0
   state = {
-    target: parseFloat(localStorage.getItem('target')) || 1000000,
-    editedTarget: 0,
-    showTargetForm: false
+    showTargetForm: false,
+    target: this.props.targetFirestore || 0,
+    editedTarget: 0
   };
 
   // render real time Month
@@ -41,7 +44,12 @@ class HeaderClient extends Component {
 
   // render Percentage of Total Sale Amount
   renderTotalSale = total => {
-    const percent = (total / this.state.target) * 100;
+    const percent = (total / this.props.targetFirestore) * 100;
+
+    // If loading render 0
+    if (!this.props.targetFirestore)
+      return <div className="percent percent-green">0%</div>;
+
     // percentages is over than 50% render green text ;else red text
     if (percent > 50) {
       return (
@@ -60,17 +68,25 @@ class HeaderClient extends Component {
   // Set new target
   targetSubmit = e => {
     const { showTargetForm, editedTarget } = this.state;
+    const { firestore } = this.props;
 
     e.preventDefault();
 
-    // set new target and close the form
+    // New target is comming from the state (form input)
+    const updatedTarget = {
+      saleTarget: parseFloat(editedTarget)
+    };
+
+    // Update target in firestore
+    firestore.update(
+      { collection: 'target', doc: '9fAxGHgEhcL69sMxfDcA' },
+      updatedTarget
+    );
+
+    // close the form
     this.setState({
-      target: parseFloat(editedTarget),
       showTargetForm: !showTargetForm
     });
-
-    // save new target into localstorage
-    localStorage.setItem('target', editedTarget);
   };
 
   // show form edit target
@@ -79,7 +95,7 @@ class HeaderClient extends Component {
 
     // Init targetForm
     let targetForm = '';
-    // If balance form should display
+    // If target form should display
     if (showTargetForm) {
       targetForm = (
         <form onSubmit={this.targetSubmit}>
@@ -105,8 +121,28 @@ class HeaderClient extends Component {
     return targetForm;
   };
 
+  // render Target from firestore
+  renderTarget = () => {
+    const { targetFirestore } = this.props;
+
+    // declare target variable
+    let targetData = 0;
+    // If loaded format and return it
+    if (targetFirestore) {
+      targetData = (
+        <div className="text-target">
+          {this.formatNumber(targetFirestore)} THB
+        </div>
+      );
+    } else {
+      targetData = <div className="text-target">0 THB</div>;
+    }
+
+    return targetData;
+  };
+
   render() {
-    const { target, showTargetForm } = this.state;
+    const { showTargetForm } = this.state;
     const { total } = this.props;
 
     return (
@@ -116,24 +152,23 @@ class HeaderClient extends Component {
             <div className="card bg-dark card-height mb-resp-card d-flex justify-content-center">
               <div className="text-white text-target-label">
                 TARGET{' '}
-                <span className="d-none d-md-inline">
+                <span className="d-none d-lg-inline">
                   IN {this.renderMonth()} {this.renderYear()}
                 </span>{' '}
                 <small>
-                  <a
-                    href="#!"
+                  <i
+                    // Toggle the form
                     onClick={() =>
                       this.setState({
                         showTargetForm: !showTargetForm
                       })
                     }
-                  >
-                    <i className="fas fa-pencil-alt text-warning" />
-                  </a>
+                    className="fas fa-pencil-alt text-warning btn-edit"
+                  />
                 </small>
               </div>
               {this.renderTargetForm()}
-              <div className="text-target">{this.formatNumber(target)} THB</div>
+              {this.renderTarget()}
               <div className="text-white text-target-label">
                 TOTAL <span className="d-none d-md-inline">SALE AMOUNT</span>
               </div>
@@ -154,4 +189,16 @@ class HeaderClient extends Component {
   }
 }
 
-export default HeaderClient;
+// get Target from redux store to props
+const mapStateToProps = state => {
+  const { target } = state.firestore.ordered;
+
+  return {
+    targetFirestore: target && target[0].saleTarget
+  };
+};
+
+export default compose(
+  firestoreConnect([{ collection: 'target' }]),
+  connect(mapStateToProps)
+)(HeaderClient);
