@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect, firebaseConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import ListItem from '../layouts/ListItem';
 import Spinner from '../layouts/Spinner';
@@ -237,6 +238,11 @@ class Client extends Component {
     }
   }
 }
+
+Client.propTypes = {
+  client: PropTypes.object,
+  auth: PropTypes.object.isRequired
+};
 
 // get Client details from reduxstore ( filter by id )
 const mapstateToProps = (state, ownProps) => {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Login extends Component {
   state = {
@@ -95,6 +96,10 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => {
   return {

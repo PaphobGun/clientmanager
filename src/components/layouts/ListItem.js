@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ListItem = ({ parentState, onChange, placeholder, name, type }) => {
   return (
@@ -16,6 +17,14 @@ const ListItem = ({ parentState, onChange, placeholder, name, type }) => {
 
 ListItem.defaultProps = {
   type: 'text'
+};
+
+ListItem.propTypes = {
+  parentState: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string
 };
 
 export default ListItem;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import PropTypes from 'prop-types';
 
 class HeaderClient extends Component {
   // Init state
@@ -188,6 +189,10 @@ class HeaderClient extends Component {
     );
   }
 }
+
+HeaderClient.propTypes = {
+  targetFirestore: PropTypes.number
+};
 
 // get Target from redux store to props
 const mapStateToProps = state => {

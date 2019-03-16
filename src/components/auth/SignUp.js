@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class SignUp extends Component {
   state = {
@@ -61,7 +62,7 @@ class SignUp extends Component {
           <div className="card bg-dark text-white">
             <div className="card-body">
               {error ? (
-                <div class="alert alert-danger" role="alert">
+                <div className="alert alert-danger" role="alert">
                   {error}
                 </div>
               ) : null}
@@ -131,6 +132,10 @@ class SignUp extends Component {
     );
   }
 }
+
+SignUp.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => {
   return {
