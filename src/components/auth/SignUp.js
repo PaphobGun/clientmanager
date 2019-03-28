@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class SignUp extends Component {
@@ -121,10 +122,17 @@ class SignUp extends Component {
                 </div>
                 <input
                   type="submit"
-                  value="Register"
-                  className="mt-3 btn btn-info btn-block"
+                  value="Create Account"
+                  className="mt-4 btn btn-info btn-block"
                 />
               </form>
+              <hr className="hr-white mt-4" />
+              <div className="box">
+                <p>Already Have An Account ?</p>
+                <Link to="/login" className="btn btn-info btn-block">
+                  Sign In
+                </Link>
+              </div>
             </div>
           </div>
         </div>

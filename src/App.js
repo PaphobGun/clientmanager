@@ -10,7 +10,7 @@ import Login from './components/auth/Login';
 import About from './components/layouts/About';
 import Error404 from './components/layouts/Error404';
 
-import './App.css';
+import './scss/App.scss';
 
 class App extends Component {
   render() {

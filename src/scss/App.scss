@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import './header';
+@import './edit';
+@import './login';
+
+html {
+  background: #354057;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.main-body {
+  background: #354057;
+}
+
+.hr-white {
+  background: white;
+}
+
+/* If screen width is less than 36em ( 767/16 px) */
+@media only screen and (max-width: 47.9375em) {
+  .mb-resp-card {
+    margin-bottom: 1rem;
+  }
+}
